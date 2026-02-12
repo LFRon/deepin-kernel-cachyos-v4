@@ -29,7 +29,7 @@ scripts/config -e CONFIG_MODULE_SIG_SHA256
 scripts/config -e CONFIG_SYSTEM_TRUSTED_KEYRING
 scripts/config -e CONFIG_KEXEC_SIG
 
-# 设置x86_64处理器ISA等级, 并同步内核localversion信息
+# 设置x86_64处理器ISA等级
 scripts/config --set-val CONFIG_X86_64_VERSION 4
 
 # 开启Clang Full-LTO支持
