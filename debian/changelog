@@ -1,4 +1,4 @@
-linux-upstream (6.19.4-1) crimson; urgency=low
+linux-upstream (6.19.5-1) crimson; urgency=low
 
   * Update CachyOS Linux kernel mainline version.
 
