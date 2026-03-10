@@ -28,5 +28,5 @@ Multi-Arch: same
 Package: linux-headers-6.19.6-cachyos
 Architecture: amd64
 Build-Profiles: <!pkg.linux-upstream.nokernelheaders>
-Depends: clang-19, llvm-19, lld-19
+Depends: clang-19, llvm-19, lld-19, clang, llvm, lld
 Description: CachyOS Linux kernel headers on amd64, This package provides kernel header files on amd64. This is useful for people who need to build external modules
