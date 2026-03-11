@@ -24,13 +24,13 @@ endif
 revision = $(shell dpkg-parsechangelog -S Version | sed -n 's/.*-//p')
 CROSS_COMPILE ?= $(filter-out $(DEB_BUILD_GNU_TYPE)-, $(DEB_HOST_GNU_TYPE)-)
 
-# 强制使用LLVM-19编译内核
-compiler-opts = LLVM=-19 LLVM_IAS=1
+# 强制使用LLVM编译内核
+# compiler-opts = 
 
 make-opts = ARCH=$(ARCH) \
     $(addprefix KBUILD_BUILD_VERSION=,$(revision)) \
-    $(addprefix CROSS_COMPILE=,$(CROSS_COMPILE)) \
-    $(compiler-opts)
+    $(addprefix CROSS_COMPILE=,$(CROSS_COMPILE)) 
+    # $(compiler-opts)
 
 binary-targets := $(addprefix binary-, image image-dbg headers libc-dev)
 
@@ -85,7 +85,7 @@ build-arch:
 	patch -p1 < debian/cachy_kernel_patches/sched/0001-bore-cachy.patch
 	patch -p1 < debian/cachy_kernel_patches/misc/0001-handheld.patch
 	patch -p1 < debian/cachy_kernel_patches/misc/0001-rt-i915.patch
-	patch -p1 < debian/cachy_kernel_patches/misc/dkms-clang.patch
+	# patch -p1 < debian/cachy_kernel_patches/misc/dkms-clang.patch
 	patch -p1 < debian/cachy_kernel_patches/misc/poc-selector.patch
 	patch -p1 < debian/cachy_kernel_patches/misc/reflex-governor.patch
 	# 拷贝配置文件至内核源码根目录

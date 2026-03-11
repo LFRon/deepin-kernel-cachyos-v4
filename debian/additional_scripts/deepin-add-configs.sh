@@ -33,9 +33,9 @@ scripts/config -e CONFIG_KEXEC_SIG
 scripts/config --set-val CONFIG_X86_64_VERSION 4
 
 # 开启Clang Full-LTO支持
-scripts/config -d CONFIG_LTO_NONE
-scripts/config -d CONFIG_LTO_CLANG_THIN
-scripts/config -e CONFIG_LTO_CLANG_FULL
+# scripts/config -d CONFIG_LTO_NONE
+# scripts/config -d CONFIG_LTO_CLANG_THIN
+# scripts/config -e CONFIG_LTO_CLANG_FULL
 
 # 开启POC-Selector空闲CPU智能选择机制
 scripts/config -e CONFIG_SCHED_POC_SELECTOR
