@@ -1,6 +1,6 @@
-From 5a802171eb4c18d873bbdbcd26666e9826000780 Mon Sep 17 00:00:00 2001
+From a0de616b608f73ad6b9390d03c52a81dd4a0ec55 Mon Sep 17 00:00:00 2001
 From: Eric Naim <dnaim@cachyos.org>
-Date: Mon, 12 Jan 2026 14:20:42 +0700
+Date: Tue, 2 Dec 2025 02:41:38 +0800
 Subject: [PATCH] rt-i915
 
 Signed-off-by: Eric Naim <dnaim@cachyos.org>
@@ -32,10 +32,10 @@ index 5e939004b646..40a9234e6e5d 100644
  	select INTERVAL_TREE
  	# we need shmfs for the swappable backing store, and in particular
 diff --git a/drivers/gpu/drm/i915/display/intel_crtc.c b/drivers/gpu/drm/i915/display/intel_crtc.c
-index 9d2a23c96c61..7dc56bad1fa1 100644
+index a187db6df2d3..dbdc4d9b2a33 100644
 --- a/drivers/gpu/drm/i915/display/intel_crtc.c
 +++ b/drivers/gpu/drm/i915/display/intel_crtc.c
-@@ -571,7 +571,8 @@ void intel_pipe_update_start(struct intel_atomic_state *state,
+@@ -562,7 +562,8 @@ void intel_pipe_update_start(struct intel_atomic_state *state,
  	 */
  	intel_psr_wait_for_idle_locked(new_crtc_state);
  
@@ -45,7 +45,7 @@ index 9d2a23c96c61..7dc56bad1fa1 100644
  
  	crtc->debug.min_vbl = evade.min;
  	crtc->debug.max_vbl = evade.max;
-@@ -589,7 +590,8 @@ void intel_pipe_update_start(struct intel_atomic_state *state,
+@@ -580,7 +581,8 @@ void intel_pipe_update_start(struct intel_atomic_state *state,
  	return;
  
  irq_disable:
@@ -55,7 +55,7 @@ index 9d2a23c96c61..7dc56bad1fa1 100644
  }
  
  #if IS_ENABLED(CONFIG_DRM_I915_DEBUG_VBLANK_EVADE)
-@@ -735,7 +737,8 @@ void intel_pipe_update_end(struct intel_atomic_state *state,
+@@ -726,7 +728,8 @@ void intel_pipe_update_end(struct intel_atomic_state *state,
  	if (!state->base.legacy_cursor_update)
  		intel_vrr_send_push(NULL, new_crtc_state);
  
@@ -66,7 +66,7 @@ index 9d2a23c96c61..7dc56bad1fa1 100644
  	if (intel_vgpu_active(dev_priv))
  		goto out;
 diff --git a/drivers/gpu/drm/i915/display/intel_cursor.c b/drivers/gpu/drm/i915/display/intel_cursor.c
-index a10b2425b94d..80af16016d5f 100644
+index d4d181f9dca5..58f2f074aff2 100644
 --- a/drivers/gpu/drm/i915/display/intel_cursor.c
 +++ b/drivers/gpu/drm/i915/display/intel_cursor.c
 @@ -919,13 +919,15 @@ intel_legacy_cursor_update(struct drm_plane *_plane,
@@ -113,10 +113,10 @@ index 27ebc32cb61a..a519d94700c3 100644
  #include <linux/string_helpers.h>
  #include <linux/types.h>
 diff --git a/drivers/gpu/drm/i915/display/intel_vblank.c b/drivers/gpu/drm/i915/display/intel_vblank.c
-index 671f357c6563..43df58fd8553 100644
+index c15234c1d96e..590a079f926b 100644
 --- a/drivers/gpu/drm/i915/display/intel_vblank.c
 +++ b/drivers/gpu/drm/i915/display/intel_vblank.c
-@@ -317,6 +317,20 @@ static void intel_vblank_section_exit(struct intel_display *display)
+@@ -315,6 +315,20 @@ static void intel_vblank_section_exit(struct intel_display *display)
  	struct drm_i915_private *i915 = to_i915(display->drm);
  	spin_unlock(&i915->uncore.lock);
  }
@@ -137,7 +137,7 @@ index 671f357c6563..43df58fd8553 100644
  #else
  static void intel_vblank_section_enter(struct intel_display *display)
  {
-@@ -325,6 +339,17 @@ static void intel_vblank_section_enter(struct intel_display *display)
+@@ -323,6 +337,17 @@ static void intel_vblank_section_enter(struct intel_display *display)
  static void intel_vblank_section_exit(struct intel_display *display)
  {
  }
@@ -155,7 +155,7 @@ index 671f357c6563..43df58fd8553 100644
  #endif
  
  static bool i915_get_crtc_scanoutpos(struct drm_crtc *_crtc,
-@@ -361,10 +386,10 @@ static bool i915_get_crtc_scanoutpos(struct drm_crtc *_crtc,
+@@ -359,10 +384,10 @@ static bool i915_get_crtc_scanoutpos(struct drm_crtc *_crtc,
  	 * timing critical raw register reads, potentially with
  	 * preemption disabled, so the following code must not block.
  	 */
@@ -169,7 +169,7 @@ index 671f357c6563..43df58fd8553 100644
  
  	/* Get optional system timestamp before query. */
  	if (stime)
-@@ -428,10 +453,10 @@ static bool i915_get_crtc_scanoutpos(struct drm_crtc *_crtc,
+@@ -426,10 +451,10 @@ static bool i915_get_crtc_scanoutpos(struct drm_crtc *_crtc,
  	if (etime)
  		*etime = ktime_get();
  
@@ -183,7 +183,7 @@ index 671f357c6563..43df58fd8553 100644
  
  	/*
  	 * While in vblank, position will be negative
-@@ -469,13 +494,11 @@ int intel_get_crtc_scanline(struct intel_crtc *crtc)
+@@ -467,13 +492,11 @@ int intel_get_crtc_scanline(struct intel_crtc *crtc)
  	unsigned long irqflags;
  	int position;
  
@@ -199,7 +199,7 @@ index 671f357c6563..43df58fd8553 100644
  
  	return position;
  }
-@@ -740,11 +763,13 @@ int intel_vblank_evade(struct intel_vblank_evade_ctx *evade)
+@@ -738,11 +761,13 @@ int intel_vblank_evade(struct intel_vblank_evade_ctx *evade)
  			break;
  		}
  
@@ -229,10 +229,10 @@ index b721bbd23356..f5a6143ea8a2 100644
  
  	/*
 diff --git a/drivers/gpu/drm/i915/gt/intel_execlists_submission.c b/drivers/gpu/drm/i915/gt/intel_execlists_submission.c
-index 3df683b0402a..948975e72d29 100644
+index 7f389cb0bde4..607c9a7b3a0a 100644
 --- a/drivers/gpu/drm/i915/gt/intel_execlists_submission.c
 +++ b/drivers/gpu/drm/i915/gt/intel_execlists_submission.c
-@@ -1300,7 +1300,7 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
+@@ -1298,7 +1298,7 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
  	 * and context switches) submission.
  	 */
  
@@ -241,7 +241,7 @@ index 3df683b0402a..948975e72d29 100644
  
  	/*
  	 * If the queue is higher priority than the last
-@@ -1400,7 +1400,7 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
+@@ -1398,7 +1398,7 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
  				 * Even if ELSP[1] is occupied and not worthy
  				 * of timeslices, our queue might be.
  				 */
@@ -250,7 +250,7 @@ index 3df683b0402a..948975e72d29 100644
  				return;
  			}
  		}
-@@ -1426,7 +1426,7 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
+@@ -1424,7 +1424,7 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
  
  		if (last && !can_merge_rq(last, rq)) {
  			spin_unlock(&ve->base.sched_engine->lock);
@@ -259,7 +259,7 @@ index 3df683b0402a..948975e72d29 100644
  			return; /* leave this for another sibling */
  		}
  
-@@ -1588,7 +1588,7 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
+@@ -1586,7 +1586,7 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
  	 */
  	sched_engine->queue_priority_hint = queue_prio(sched_engine);
  	i915_sched_engine_reset_on_empty(sched_engine);
@@ -268,7 +268,7 @@ index 3df683b0402a..948975e72d29 100644
  
  	/*
  	 * We can skip poking the HW if we ended up with exactly the same set
-@@ -1614,13 +1614,6 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
+@@ -1612,13 +1612,6 @@ static void execlists_dequeue(struct intel_engine_cs *engine)
  	}
  }
  
@@ -282,7 +282,7 @@ index 3df683b0402a..948975e72d29 100644
  static void clear_ports(struct i915_request **ports, int count)
  {
  	memset_p((void **)ports, NULL, count);
-@@ -2475,7 +2468,7 @@ static void execlists_submission_tasklet(struct tasklet_struct *t)
+@@ -2473,7 +2466,7 @@ static void execlists_submission_tasklet(struct tasklet_struct *t)
  	}
  
  	if (!engine->execlists.pending[0]) {
@@ -305,10 +305,10 @@ index 053780f562c1..b25fa8f4dc4b 100644
  	/*
  	 * FIXME: Have caller pass in if we are in an atomic context to avoid
 diff --git a/drivers/gpu/drm/i915/i915_request.c b/drivers/gpu/drm/i915/i915_request.c
-index 4399941236cb..d82105408bd8 100644
+index b9a2b2194c8f..e24798e4b44e 100644
 --- a/drivers/gpu/drm/i915/i915_request.c
 +++ b/drivers/gpu/drm/i915/i915_request.c
-@@ -610,7 +610,6 @@ bool __i915_request_submit(struct i915_request *request)
+@@ -608,7 +608,6 @@ bool __i915_request_submit(struct i915_request *request)
  
  	RQ_TRACE(request, "\n");
  
@@ -316,7 +316,7 @@ index 4399941236cb..d82105408bd8 100644
  	lockdep_assert_held(&engine->sched_engine->lock);
  
  	/*
-@@ -719,7 +718,6 @@ void __i915_request_unsubmit(struct i915_request *request)
+@@ -717,7 +716,6 @@ void __i915_request_unsubmit(struct i915_request *request)
  	 */
  	RQ_TRACE(request, "\n");
  
@@ -355,10 +355,10 @@ index f13ff71edf2d..3c67e267fb60 100644
  
  #include <linux/types.h>
 diff --git a/kernel/ksysfs.c b/kernel/ksysfs.c
-index a9e6354d9e25..691c5671b346 100644
+index eefb67d9883c..20ac8a5ac27d 100644
 --- a/kernel/ksysfs.c
 +++ b/kernel/ksysfs.c
-@@ -132,6 +132,15 @@ KERNEL_ATTR_RO(vmcoreinfo);
+@@ -188,6 +188,15 @@ KERNEL_ATTR_RO(crash_elfcorehdr_size);
  
  #endif /* CONFIG_VMCORE_INFO */
  
@@ -374,7 +374,7 @@ index a9e6354d9e25..691c5671b346 100644
  /* whether file capabilities are enabled */
  static ssize_t fscaps_show(struct kobject *kobj,
  				  struct kobj_attribute *attr, char *buf)
-@@ -205,6 +214,9 @@ static struct attribute * kernel_attrs[] = {
+@@ -271,6 +280,9 @@ static struct attribute * kernel_attrs[] = {
  #ifndef CONFIG_TINY_RCU
  	&rcu_expedited_attr.attr,
  	&rcu_normal_attr.attr,
