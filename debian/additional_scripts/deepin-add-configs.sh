@@ -2,7 +2,7 @@
 
 # 让内核编译时手动指定LOCALVERSION版本, 避免headers与images版本不一致
 scripts/config -d CONFIG_LOCALVERSION_AUTO
-scripts/config --set-str CONFIG_LOCALVERSION '-cachyos'
+scripts/config --set-str CONFIG_LOCALVERSION '-cachyos1'
 
 # Do not change the system's hostname
 scripts/config -u CONFIG_DEFAULT_HOSTNAME
@@ -48,9 +48,9 @@ scripts/config -d CONFIG_PREEMPT_VOLUNTARY
 scripts/config -d CONFIG_PREEMPT_RT
 scripts/config -e CONFIG_PREEMPT_LAZY
 
-# 开启编译器O3编译选项支持
-scripts/config -d CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE
-scripts/config -e CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3
+# 禁用编译器O3编译选项支持
+# scripts/config -d CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE
+# scripts/config -e CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3
 
 # 调整OverlayFS设置适应磐石结构
 scripts/config -d CONFIG_OVERLAY_FS_REDIRECT_DIR
