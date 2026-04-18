@@ -37,9 +37,6 @@ scripts/config -d CONFIG_LTO_NONE
 scripts/config -d CONFIG_LTO_CLANG_THIN
 scripts/config -e CONFIG_LTO_CLANG_FULL
 
-# 开启POC-Selector空闲CPU智能选择机制
-scripts/config -e CONFIG_SCHED_POC_SELECTOR
-
 # 开启PREEMPT_LAZY动态抢占支持
 scripts/config -e CONFIG_PREEMPT_BUILD
 scripts/config -e CONFIG_ARCH_HAS_PREEMPT_LAZY
