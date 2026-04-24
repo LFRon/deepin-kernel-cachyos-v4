@@ -45,9 +45,9 @@ scripts/config -d CONFIG_PREEMPT_VOLUNTARY
 scripts/config -d CONFIG_PREEMPT_RT
 scripts/config -e CONFIG_PREEMPT_LAZY
 
-# 禁用编译器O3编译选项支持
-# scripts/config -d CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE
-# scripts/config -e CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3
+# 启用编译器O3编译选项支持
+scripts/config -d CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE
+scripts/config -e CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3
 
 # 调整OverlayFS设置适应磐石结构
 scripts/config -d CONFIG_OVERLAY_FS_REDIRECT_DIR
