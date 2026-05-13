@@ -25,7 +25,7 @@ revision = $(shell dpkg-parsechangelog -S Version | sed -n 's/.*-//p')
 CROSS_COMPILE ?= $(filter-out $(DEB_BUILD_GNU_TYPE)-, $(DEB_HOST_GNU_TYPE)-)
 
 # 强制使用LLVM编译内核
-compiler-opts = LLVM=-19 LLVM_IAS=1
+compiler-opts = LLVM=-21 LLVM_IAS=1
 
 make-opts = ARCH=$(ARCH) \
     $(addprefix KBUILD_BUILD_VERSION=,$(revision)) \
