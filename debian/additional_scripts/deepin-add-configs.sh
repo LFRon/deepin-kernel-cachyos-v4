@@ -40,11 +40,6 @@ scripts/config -e CONFIG_KEXEC_SIG
 # 设置x86_64处理器ISA等级
 scripts/config --set-val CONFIG_X86_64_VERSION 4
 
-# 开启Clang Full-LTO支持
-scripts/config -d CONFIG_LTO_NONE
-scripts/config -d CONFIG_LTO_CLANG_THIN
-scripts/config -e CONFIG_LTO_CLANG_FULL
-
 # 开启PREEMPT_LAZY动态抢占支持
 scripts/config -e CONFIG_PREEMPT_BUILD
 scripts/config -e CONFIG_ARCH_HAS_PREEMPT_LAZY
