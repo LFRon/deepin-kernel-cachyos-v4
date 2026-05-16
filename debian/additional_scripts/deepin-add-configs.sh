@@ -48,6 +48,11 @@ scripts/config -d CONFIG_PREEMPT_VOLUNTARY
 scripts/config -d CONFIG_PREEMPT_RT
 scripts/config -e CONFIG_PREEMPT_LAZY
 
+# 开启Clang Full-LTO支持
+scripts/config -d CONFIG_LTO_NONE
+scripts/config -d CONFIG_LTO_CLANG_THIN
+scripts/config -e CONFIG_LTO_CLANG_FULL
+
 # 启用编译器O3编译选项支持
 scripts/config -d CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE
 scripts/config -e CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3
