@@ -20,8 +20,8 @@ scripts/config -e CONFIG_HIGH_RES_TIMERS
 # 因此先关闭CachyOS内核配置里默认开着的CONFIG_NO_HZ_FULL等冲突选项
 # 避免过于频繁地关闭CPU时钟中断导致日用卡顿
 scripts/config -d CONFIG_HZ_PERIODIC
-scripts/config -d CONFIG_NO_HZ_FULL
-scripts/config -e CONFIG_NO_HZ_IDLE
+scripts/config -d CONFIG_NO_HZ_IDLE
+scripts/config -e CONFIG_NO_HZ_FULL
 scripts/config -d CONFIG_HZ_300
 scripts/config -e CONFIG_HZ_300 --set-val HZ 300
 
