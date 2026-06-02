@@ -1,5 +1,5 @@
-linux-upstream (7.0.10-1) crimson; urgency=low
+linux-upstream (7.0.11-1) crimson; urgency=low
 
   * Update CachyOS Linux kernel mainline version.
 
- -- LFRon <mozixun@Mozixun-PC>  Sat, 23 May 2026 20:41:10 +0800
+ -- LFRon <mozixun@Mozixun-PC>  Tue, 2 Jun 2026 15:37:10 +0800
