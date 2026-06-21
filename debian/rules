@@ -84,7 +84,7 @@ build-arch:
 	# 先应用CachyOS内核补丁
 	patch -p1 < debian/cachy_kernel_patches/sched/0001-bore-cachy.patch
 	patch -p1 < debian/cachy_kernel_patches/misc/0001-acpi-call.patch
-	# patch -p1 < debian/cachy_kernel_patches/misc/0001-handheld.patch
+	patch -p1 < debian/cachy_kernel_patches/misc/0001-handheld.patch
 	# patch -p1 < debian/cachy_kernel_patches/misc/0001-hardened.patch
 	patch -p1 < debian/cachy_kernel_patches/misc/dkms-clang.patch
 	# 拷贝配置文件至内核源码根目录
