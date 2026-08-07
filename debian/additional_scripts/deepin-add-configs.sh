@@ -41,21 +41,19 @@ scripts/config -e CONFIG_KEXEC_SIG
 scripts/config --set-val CONFIG_X86_64_VERSION 4
 
 # 开启PREEMPT_LAZY动态抢占支持
-scripts/config -e CONFIG_PREEMPT_BUILD
-scripts/config -e CONFIG_ARCH_HAS_PREEMPT_LAZY
 scripts/config -d CONFIG_PREEMPT
 scripts/config -d CONFIG_PREEMPT_VOLUNTARY
 scripts/config -d CONFIG_PREEMPT_RT
 scripts/config -e CONFIG_PREEMPT_LAZY
 
-# 开启Clang Full-LTO支持
-scripts/config -d CONFIG_LTO_NONE
-scripts/config -d CONFIG_LTO_CLANG_THIN
-scripts/config -e CONFIG_LTO_CLANG_FULL
+# 由于内核编译器切换为GCC, Clang Full-LTO+O3支持已禁用
+# scripts/config -d CONFIG_LTO_NONE
+# scripts/config -d CONFIG_LTO_CLANG_THIN
+# scripts/config -e CONFIG_LTO_CLANG_FULL
 
 # 启用编译器O3编译选项支持
-scripts/config -d CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE
-scripts/config -e CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3
+# scripts/config -d CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE
+# scripts/config -e CONFIG_CC_OPTIMIZE_FOR_PERFORMANCE_O3
 
 # 调整OverlayFS设置适应磐石结构
 scripts/config -d CONFIG_OVERLAY_FS_REDIRECT_DIR
