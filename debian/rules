@@ -80,21 +80,21 @@ binary-arch: $(binary-targets)
 build: build-arch build-indep
 build-indep:
 build-arch:
-    # 先应用CachyOS内核补丁
-    patch -p1 < debian/cachy_kernel_patches/sched/0001-bore-cachy.patch
-    patch -p1 < debian/cachy_kernel_patches/misc/0001-acpi-call.patch
-    patch -p1 < debian/cachy_kernel_patches/misc/0001-handheld.patch
-    patch -p1 < debian/cachy_kernel_patches/misc/0001-rt-i915.patch
-    patch -p1 < debian/cachy_kernel_patches/misc/poc-selector.patch
-    # patch -p1 < debian/cachy_kernel_patches/misc/dkms-clang.patch
-    # 拷贝配置文件至内核源码根目录
-    cp debian/config .config
-    # 加入deepin专用配置补丁脚本
-    bash debian/additional_scripts/deepin-add-configs.sh
-    # 应用剩下未应用的配置
-    $(Q)$(MAKE) $(make-opts) olddefconfig
-    # 构建内核
-    $(Q)$(MAKE) $(make-opts) $(if $(filter um,$(ARCH)),,headers) all
+	# 先应用CachyOS内核补丁
+	patch -p1 < debian/cachy_kernel_patches/sched/0001-bore-cachy.patch
+	patch -p1 < debian/cachy_kernel_patches/misc/0001-acpi-call.patch
+	patch -p1 < debian/cachy_kernel_patches/misc/0001-handheld.patch
+	patch -p1 < debian/cachy_kernel_patches/misc/0001-rt-i915.patch
+	patch -p1 < debian/cachy_kernel_patches/misc/poc-selector.patch
+	# patch -p1 < debian/cachy_kernel_patches/misc/dkms-clang.patch
+	# 拷贝配置文件至内核源码根目录
+	cp debian/config .config
+	# 加入deepin专用配置补丁脚本
+	bash debian/additional_scripts/deepin-add-configs.sh
+	# 应用剩下未应用的配置
+	$(Q)$(MAKE) $(make-opts) olddefconfig
+	# 构建内核
+	$(Q)$(MAKE) $(make-opts) $(if $(filter um,$(ARCH)),,headers) all
 
 .PHONY: clean
 clean:
