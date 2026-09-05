@@ -24,7 +24,7 @@ endif
 revision = $(shell dpkg-parsechangelog -S Version | sed -n 's/.*-//p')
 CROSS_COMPILE ?= $(filter-out $(DEB_BUILD_GNU_TYPE)-, $(DEB_HOST_GNU_TYPE)-)
 
-# 强制使用LLVM编译内核 (已废弃,现已使用GCC)
+# 强制使用LLVM编译内核 (由于现使用GCC编译,故废弃)
 # compiler-opts = LLVM=-22 LLVM_IAS=1
 
 make-opts = ARCH=$(ARCH) \
@@ -85,7 +85,6 @@ build-arch:
 	patch -p1 < debian/cachy_kernel_patches/misc/0001-acpi-call.patch
 	patch -p1 < debian/cachy_kernel_patches/misc/0001-handheld.patch
 	patch -p1 < debian/cachy_kernel_patches/misc/0001-rt-i915.patch
-	patch -p1 < debian/cachy_kernel_patches/misc/poc-selector.patch
 	# patch -p1 < debian/cachy_kernel_patches/misc/dkms-clang.patch
 	# 拷贝配置文件至内核源码根目录
 	cp debian/config .config
