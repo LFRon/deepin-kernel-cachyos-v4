@@ -1,0 +1,24 @@
+From a282297f32c77cb5bb8a5473c9597a45793eab8b Mon Sep 17 00:00:00 2001
+From: wenlunpeng <wenlunpeng@uniontech.com>
+Date: Thu, 9 Apr 2026 18:33:21 +0800
+Subject: [PATCH] kbuild: Keep .config in linux-headers for old dkms
+
+This was removed in 43eaad8716("kbuild: slim down package for building
+external modules"). But old versions of dkms still want the .config
+file, so keep it.
+---
+ scripts/package/install-extmod-build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/scripts/package/install-extmod-build b/scripts/package/install-extmod-build
+index 7c07f722ccf36..8fd2dae11910d 100755
+--- a/scripts/package/install-extmod-build
++++ b/scripts/package/install-extmod-build
+@@ -37,6 +37,7 @@ mkdir -p "${destdir}"
+ 	echo include/config/auto.conf
+ 	echo include/config/kernel.release
+ 	echo include/generated
++	echo .config
+ 	find_in_scripts
+ 
+ 	if is_enabled CONFIG_GCC_PLUGINS; then

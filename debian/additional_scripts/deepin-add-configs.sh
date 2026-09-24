@@ -7,8 +7,9 @@ scripts/config --set-str CONFIG_LOCALVERSION '-cachyos-x64v4'
 # Do not change the system's hostname
 scripts/config -u CONFIG_DEFAULT_HOSTNAME
 
-# 开启CachyOS BORE用户态调度
-scripts/config -e CONFIG_CACHY -e CONFIG_SCHED_BORE
+# 开启CachyOS额外优化选项,但不再使用BORE调度器
+scripts/config -e CONFIG_CACHY
+scripts/config -d CONFIG_SCHED_BORE
 
 # 开启必需的内核LSM模块
 scripts/config --set-str CONFIG_LSM lockdown,yama,integrity,selinux,bpf,landlock,apparmor
