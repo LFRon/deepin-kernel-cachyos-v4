@@ -6,7 +6,7 @@ Rules-Requires-Root: no
 Build-Depends: debhelper-compat (= 12)
 Build-Depends-Arch: bc, bison, flex, linux-libc-dev, build-essential, openssl, patch, zstd,
  gcc, g++, cpio,
- kmod, libdw-dev:native, libelf-dev:native,
+ kmod, libdw-dev:native, libelf-dev:native, dwarves,
  libssl-dev:native, libssl-dev <!pkg.linux-upstream.nokernelheaders>,
  python3:native, rsync, rustc | rustup
 Homepage: https://www.kernel.org/
