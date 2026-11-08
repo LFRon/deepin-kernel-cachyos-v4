@@ -1,0 +1,49 @@
+From af660e166c52ff625e85e89e73c8d8d3f792aa65 Mon Sep 17 00:00:00 2001
+From: CachyOS Kernel User <user@localhost>
+Date: Sun, 8 Nov 2026 23:19:45 +0800
+Subject: [PATCH] drm/amd/display: re-enable common modes for eDP after
+ handheld patch
+
+The CachyOS handheld patch changes amdgpu_dm_connector_get_modes() to:
+
+    if (encoder && connector->connector_type != DRM_MODE_CONNECTOR_eDP)
+        amdgpu_dm_connector_add_common_modes(encoder, connector);
+
+This prevents internal eDP panels from receiving the standard common
+modes (1920x1080, 1920x1200, 1600x1200, ...).  As a result, users can
+only select the native EDID modes, e.g. 2560x1440 on a 2560x1440 panel.
+
+Add the common modes explicitly for eDP before the FreeSync modes are
+added.  amdgpu_dm_connector_add_common_modes() skips modes that already
+exist in probed_modes, so this is a no-op on a tree without the handheld
+patch and restores the previous behavior on a tree with it.
+
+This matches the upstream behavior after commit c2fbf72fe3c2
+("drm/amd: Re-enable common modes for eDP and LVDS").
+
+Signed-off-by: CachyOS Kernel User <user@localhost>
+---
+ .../drm/amd/display/amdgpu_dm/amdgpu_dm_connector.c   | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_connector.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_connector.c
+index e0be6c5..7971ddd 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_connector.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_connector.c
+@@ -3168,2 +3168,13 @@ static int amdgpu_dm_connector_get_modes(struct drm_connector *connector)
+ 			amdgpu_dm_connector_add_common_modes(encoder, connector);
++		/*
++		 * The CachyOS handheld patch excludes eDP from the common mode
++		 * addition above.  Add them here explicitly so internal eDP panels
++		 * still expose the usual non-native resolutions.
++		 *
++		 * amdgpu_dm_connector_add_common_modes() skips modes that are
++		 * already present, so this is a no-op on kernels without the
++		 * handheld patch.
++		 */
++		if (encoder && connector->connector_type == DRM_MODE_CONNECTOR_eDP)
++			amdgpu_dm_connector_add_common_modes(encoder, connector);
+ 		amdgpu_dm_connector_add_freesync_modes(connector, drm_edid);
+-- 
+2.51.0
+
