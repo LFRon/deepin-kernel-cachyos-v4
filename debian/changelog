@@ -1,5 +1,6 @@
-linux-upstream (7.3.3-1) crimson; urgency=low
+linux-upstream (7.3.3-2) crimson; urgency=low
 
   * Update CachyOS Linux kernel mainline version.
+  * Remove simpledrm to avoid only single display resolution.
 
- -- LFRon <mozixun@Mozixun-PC>  Sat, 7 Nov 2026 23:40:00 +0800
+ -- LFRon <mozixun@Mozixun-PC>  Sun, 8 Nov 2026 15:47:00 +0800
