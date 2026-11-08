@@ -63,3 +63,10 @@ scripts/config -d CONFIG_OVERLAY_FS_INDEX
 scripts/config -e CONFIG_OVERLAY_FS_XINO_AUTO
 scripts/config -d CONFIG_OVERLAY_FS_METACOPY
 scripts/config -d CONFIG_OVERLAY_FS_DEBUG
+
+# 关闭simpledrm,强制使用传统fbdev,修复amdgpu下仅存在唯一屏幕分辨率的问题
+scripts/config -d CONFIG_SYSFB_SIMPLEFB
+scripts/config -d CONFIG_DRM_SIMPLEDRM
+scripts/config -d CONFIG_DRM_EFIDRM
+scripts/config -e CONFIG_FB_EFI
+scripts/config -e CONFIG_FB_SIMPLE
